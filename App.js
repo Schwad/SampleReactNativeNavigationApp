@@ -9,7 +9,7 @@ import { StackNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Welcome Playa',
   };
   render() {
      const { navigate } = this.props.navigation;
@@ -17,8 +17,8 @@ class HomeScreen extends React.Component {
        <View>
          <Text>Hello, Navigation! ;) </Text>
          <Button
-          onPress={() => navigate('Chat')}
-          title="Chat with schwaddy"
+          onPress={() => navigate('Chat', { user: 'Schwaddy' })}
+          title="Chat with a mystery user"
           />
        </View>
      );
@@ -26,13 +26,14 @@ class HomeScreen extends React.Component {
 }
 
 class ChatScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Chat with schwaddy',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: `Chat with ${navigation.state.params.user}`,
+  });
   render() {
+    const { params } = this.props.navigation.state;
     return (
       <View>
-        <Text>Chat with Schwaddinator!</Text>
+        <Text>Chat with { params.user }!</Text>
       </View>
     );
   }
