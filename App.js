@@ -1,4 +1,4 @@
-// Docs for example- https://reactnavigation.org/docs/intro/headers
+// Docs for example- https://reactnavigation.org/docs/navigators/stack
 import React from 'react';
 import {
   AppRegistry,
@@ -9,65 +9,44 @@ import {
 import { StackNavigator } from 'react-navigation';
 import { TabNavigator } from 'react-navigation';
 
-class RecentChatsScreen extends React.Component {
+class MyHomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  }
+
   render() {
-    return(
-       <View>
-         <Text>List of recent chats</Text>
-         <Button
-           onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
-           title="Chat with Lucy"
-         />
-       </View>
-     )
+    return (
+      <Button
+        onPress={() => this.props.navigation.navigate('Profile', {name: 'Lucy'})}
+        title="Go to Lucy's profile"
+      />
+    );
   }
 }
 
-class AllContactsScreen extends React.Component {
-  render() {
-    return(
-       <View>
-         <Text>List of all contacts</Text>
-         <Button
-           onPress={() => this.props.navigation.navigate('Chat', { user: 'Lucy' })}
-           title="Chat with Lucy"
-         />
-       </View>
-     )
+class MyProfileScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Profile',
+    headerRight: 'info',
+    headerLeft: 'back'
   }
-}
-
-const MainScreenNavigator = TabNavigator({
-  Recent: { screen: RecentChatsScreen },
-  All: { screen: AllContactsScreen },
-});
-
-MainScreenNavigator.navigationOptions = {
-  title: 'My Chats',
-};
-
-class ChatScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const {state, setParams} = navigation;
-    const isInfo = state.params.mode === 'info';
-    const {user} = state.params;
-    return {
-      title: isInfo ? `${user}'s Contact Info` : `Chat with ${state.params.user}`,
-      headerRight: (
-        <Button
-          title={isInfo ? 'Done' : `${user}'s info`}
-          onPress={() => setParams({ mode: isInfo ? 'none' : 'info'})}
-          />
-      ),
-    };
-  };
+  render() {
+    return (
+      // before you continue get lucy to dynamically show up
+      <View><Text>Wutup</Text></View>
+    )
+  }
 }
 
 const SampleNavigationApp = StackNavigator({
-  Home: { screen: MainScreenNavigator },
-  Chat: { screen: ChatScreen },
+  Home: {
+    screen: MyHomeScreen,
+  },
+  Profile: {
+    path: 'people/:name',
+    screen: MyProfileScreen,
+  },
 });
-
 
 
 AppRegistry.registerComponent('SampleNavigationApp', () => SampleNavigationApp)
