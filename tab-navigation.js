@@ -1,4 +1,5 @@
 //Relevant docs: https://reactnavigation.org/docs/navigators/tab
+// can also call on navigation option https://reactnavigation.org/docs/navigators/navigation-options
 import React from 'react';
 import { Button, ScrollView, Text, AppRegistry, StyleSheet, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
