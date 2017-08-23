@@ -1,3 +1,4 @@
+// related docs: https://reactnavigation.org/docs/guides/linking
 import React from 'react';
 import {
   AppRegistry,
